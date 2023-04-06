@@ -20,11 +20,23 @@ func main() {
 
 	r.AddRoute("GET", "/shutdown", func(writer http.ResponseWriter, request *http.Request) {
 		if err := exec.Command("cmd", "/C", "shutdown", "/s").Run(); err != nil {
+			if exitError, ok := err.(*exec.ExitError); ok {
+				exitStatus := exitError.ExitCode()
+				if exitStatus == 1190 {
+					errors.JSONError(
+						writer,
+						"Sorry, a system shutdown is already scheduled. Please wait until the system shuts down automatically.",
+						http.StatusConflict,
+					)
+					return
+				}
+			}
 			errors.JSONError(
 				writer,
 				"An error has occurred while trying to initiate the shutdown procedure",
 				http.StatusInternalServerError,
 			)
+			return
 		}
 		serializers.JsonResponse(
 			writer,

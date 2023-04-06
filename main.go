@@ -29,7 +29,7 @@ func main() {
 		serializers.JsonResponse(
 			writer,
 			struct {
-				Detail string
+				Detail string `json:"detail"`
 			}{
 				Detail: "Shutdown procedure successfully initialized",
 			},

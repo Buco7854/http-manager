@@ -19,7 +19,7 @@ func main() {
 	r := new(router.Router)
 
 	r.AddRoute("GET", "/shutdown", func(writer http.ResponseWriter, request *http.Request) {
-		if err := exec.Command("cmd", "/C", "shutdown", "/s").Run(); err != nil {
+		if err := exec.Command("cmd", "/C", "shutdown", "/s", "/t", "10").Run(); err != nil {
 			if exitError, ok := err.(*exec.ExitError); ok {
 				exitStatus := exitError.ExitCode()
 				if exitStatus == 1190 {

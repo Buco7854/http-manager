@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/Buco7854/http-shutdown/errors"
+	"github.com/Buco7854/http-manager/errors"
 	"net/http"
 )
 

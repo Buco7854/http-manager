@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"github.com/Buco7854/http-shutdown/errors"
-	"github.com/Buco7854/http-shutdown/router"
-	"github.com/Buco7854/http-shutdown/serializers"
+	"github.com/Buco7854/http-manager/errors"
+	"github.com/Buco7854/http-manager/router"
+	"github.com/Buco7854/http-manager/serializers"
 	"log"
 	"net/http"
 	"os"

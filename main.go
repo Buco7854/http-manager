@@ -47,6 +47,24 @@ func main() {
 			},
 		)
 	})
+	r.AddRoute("GET", "/launch-apex-legends", func(writer http.ResponseWriter, request *http.Request) {
+		if err := exec.Command("cmd", "/C", "start", "steam://rungameid/1172470").Run(); err != nil {
+			errors.JSONError(
+				writer,
+				"An error has occurred while trying to launch the game",
+				http.StatusInternalServerError,
+			)
+			return
+		}
+		serializers.JsonResponse(
+			writer,
+			struct {
+				Detail string `json:"detail"`
+			}{
+				Detail: "Successfully Launched Apex Legends",
+			},
+		)
+	})
 
 	server := &http.Server{
 		Addr:    ":8080",
